@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rock Paper Scissors Gane</title>
+</head>
+<body>
+    
+    <script>
+        /*Global scope variables to keep track of the human and conputer score
+        and initalize the value to value to 0*/
+        // use let because values will be incremented later
+        let computerScore = 0;
+        let humanScore = 0;
+
+        // Create Function name getComputerChoice
+        function getComputerChoice(){
+            //first create the math.random to generate int numbers betweeen range 1-3 and store it a variable
+            let computerResult;
+            let randomChoice = Math.floor(Math.random() * 3) + 1;
+
+            //Now create a condition for the computer using if statements.
+            //repalcing 1-3 with the computers results
+
+            if (randomChoice === 1){
+                computerResult = "rock";
+            } else if(randomChoice === 2){
+                computerResult = "paper";
+            } else if(randomChoice === 3){
+                computerResult = "scissors";
+            }
+            // Will return computer result
+            return computerResult;
+        }
+        
+        // create user function
+        function getHumanChoice(){
+            // Create a user prompt for the player to enter rock paper or scissors
+            let user = prompt("Please enter Rock, Paper or Scissors?");
+
+            // will show what the player entered
+            
+            // if statement to check if the user entered correct value
+            if (user === "rock"){
+                alert(`Player entered: ${user}`);
+            } else if( user === "paper"){
+                alert(`Player entered: ${user}`);
+            } else if (user === "scissors"){
+                alert(`Player entered: ${user}`);
+            }
+          
+            return user;
+
+            
+        }
+        
+        
+        // Creating playGame function and nest playRound function and score variables in inside it
+        // to have it play 5 rounds and declare the winner
+
+        function playGame(){
+            
+            /*Creating Logic to play round by round*/
+
+            // First create a playRound function with 2 params of humanChoice and computerChoice
+            function playRound(humanChoice, computerChoice){
+                let humanChoice1 = humanChoice.toLowerCase();
+                
+                /* create a condition such as if statement to create the logic of the game
+                    create if statement to return true if all statements are true
+                    use AND logic for when it's true if human draws rock and cpu draws scissors
+                    than human shall win. vice versa for the computer
+                    Increment the score whethet the human or computer wins */
+                if (humanChoice1 === "rock" && computerChoice === "scissors"){
+                    
+                    alert("You Win! Rock beats Scissors");
+                    return humanScore++;
+                } else if (humanChoice1 === "paper" && computerChoice === "rock"){
+                    
+                    alert("You Win! Paper beats Rock");
+                    return humanScore++;
+                } else if (humanChoice1 === "scissors" && computerChoice === "paper"){
+                    
+                    alert("You Win! Scissors beats Paper");
+                    return humanScore++;
+                } else if (computerChoice === "rock" && humanChoice1 === "scissors"){
+                    
+                    alert("You Lose! Computer Wins! Rock beats Scissors");
+                    return computerScore++;
+                } else if (computerChoice === "paper" && humanChoice1 === "rock"){
+                    alert("You Lose! Computer Wins! Paper beats Rock");
+                    return computerScore++;
+                } else if (computerChoice === "scissors" && humanChoice1 === "paper"){
+                    alert("You Lose! Computer Wins! Scissors beats Paper");
+                    return computerScore++;
+                }// when it's a draw! Both draw the same! 
+                else if (humanChoice1 === "rock" && computerChoice === "rock"){
+                    alert("It's a Draw! Both Drew Rock" );
+                }else if (humanChoice1 === "paper" && computerChoice === "paper"){
+                    alert("It's a Draw! Both Drew Paper" );
+                }else if (humanChoice1 === "scissors" && computerChoice === "scissors"){
+                    alert("It's a Draw! Both Drew Scissors");
+                }
+                
+            }
+            
+            
+
+            // create const variables to select get human and computer function
+            //for loop to go through 5 rds untill we get a winner
+          for (let i = 1; i < 6; i++) {
+             // create const variables to select get human and computer function
+                const humanSelection = getHumanChoice();
+                const computerSelection = getComputerChoice();
+                
+                //run the play function
+                //call first with function variables to see if we lost, won, and draw
+                //playRound(humanSelection, computerSelection) is Called to get the options of the player and computer;
+                playRound(humanSelection, computerSelection);
+                if (i === 5){
+                    if(humanScore > computerScore){
+                        alert("Player Wins!");
+                    } else if(computerScore > humanScore){
+                        alert("Computer Wins");
+                    }else if (humanScore === computerScore){
+                        alert("Draw! No One Wins or Loses!");
+                    }
+                }
+                alert(`HumanScore: ${humanScore} : Computer: ${computerScore}`);
+            }
+            window.location.reload();
+        }
+        
+       
+
+            
+            playGame(5);
+    </script>
+</body>
+</html>
